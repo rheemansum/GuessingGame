@@ -1,18 +1,67 @@
 #bodyContainer{
-	margin: 0 auto;
 	display:table;
 	width:100%;
 	height:100%;
 }
-#gameHeader{
+#gameHeader{	
 	font-family:Helvetica,sans-serif;
 	font-size:20px;
-	color:red;
-	width:180px;
+	color:#888888;
+	width:188px;
 	margin:0 auto;
+	text-align:justify;
+	border:2px solid #DDDDDD;
+	border-radius:5px;
+	padding:10px;
 }
-#menu{
+#answer{
+	vertical-align:middle;
+	padding-top:30px;
+	border:1px solid #DDDDDD;
+	border-radius: 5px;
+	margin:5px auto;
+	height:50px;
+	width: 300px;
+	background-color:#EEEEEE;
+	font-family:Helvetica,sans-serif;
+	font-size:20px;
+	text-align:center;
+}
+#guessContainer{
 	margin:0 auto;
+	width:181px;
+}
+
+#buttonHolder{
+	margin: 0 auto;
+	width:235px;
+}
+
+#rangeBar{
+	margin: 0 auto;
+	width:111px;
+}
+
+#setRange{
+	margin: 0 auto;
+}
+
+#setRangeHolder{
+	margin: 2px auto;
+	width:80px	
+}
+#guessInput{
+	margin:2px 0;
+}
+
+input{
+	border-radius:2px;	
+	border:1px solid #DDDDDD;
+	padding:2px 4px;
+}
+
+.rangeInput{
+	margin:2px 0;
 }
 
 .button{
@@ -20,14 +69,10 @@
 	padding: 5px 10px;
 	margin: 2px;
 	float:left;
-	
+	font-family:Helvetica,sans-serif;
+	font-size:12px;	
+	cursor:pointer;
+	border-radius:2px;
 }
-#rangeBar{
-	margin:0 auto;	
-	float:left;
-}
-.rangeHolder{
-	margin:0 auto;
 
-}
 
