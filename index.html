@@ -3,13 +3,17 @@
         <title>
             Guessing Game
         </title>
-		<link rel="stylesheet" type="text/css" href="GuessingGame.css">
+		<link rel="stylesheet" type="text/css" href="guessingGame.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script type="text/javascript" src="guessingGame.js"></script>
+
 
     </head>
     <body>
 		<div id="bodyContainer">
 		<div id="gameHeader">My Guessing Game</div>
 		<div id="answer">TOO LOW</div>
+		<div id="textBlock">Guess a number between 1 and 100</div>
 
 		<div id="guessContainer">
 			<input id="guessInput" placeholder="Enter Your Guess" type="text">
@@ -28,13 +32,11 @@
 				<input class="rangeInput" placeholder="set max" size=10 id="max" type="text">
 			</div>
 		</div>
-		<div id="setRangeHolder">
-			<div class="button" id="setRange">Set Range</div>
-		</div>
 
 		
 		</div>
-        
+
+
 
     </body>
 

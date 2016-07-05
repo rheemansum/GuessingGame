@@ -28,6 +28,18 @@
 	text-align:center;
 	color:#555555;
 }
+#textBlock{
+	width: 300px;
+	margin:5px auto;
+	text-align:center;
+	padding:10px;
+
+	font-family: Helvetica,sans-serif;
+	font-size: 14px;
+	border:2px solid #DDDDDD;
+	border-radius:5px;
+
+}
 #guessContainer{
 	margin:0 auto;
 	width:181px;
@@ -36,6 +48,7 @@
 #buttonHolder{
 	margin: 0 auto;
 	width:235px;
+	height: 30px;
 }
 
 #rangeBar{
@@ -43,14 +56,6 @@
 	width:111px;
 }
 
-#setRange{
-	margin: 0 auto;
-}
-
-#setRangeHolder{
-	margin: 2px auto;
-	width:80px	
-}
 #guessInput{
 	margin:2px 0;
 }
