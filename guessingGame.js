@@ -2,17 +2,19 @@
 // try to elminate these global variables in your project, these are here just to start.
 
 
-
-
 /* **** Guessing Game Functions **** */
 
 // Generate the Winning Number'
-var winningNumber, playerGuess;
+var winningNumber, playerGuess, guessCount;
 $(document).ready(function(){
 	winningNumber = generateWinningNumber();
+	guessCount = 5;
 	console.log(winningNumber);
 });
 
+function generateRand(){
+
+}
 
 
 function generateWinningNumber(){
@@ -22,7 +24,7 @@ function generateWinningNumber(){
 	var min = +$('#min').val();
 	if(min == 0){min = 1};
 	if(max == 0){max = 100};
-	$("#textBlock").text("Guess a number between " + min + " and " + max);
+	$("#rangeBlock").text("Guess a number between " + min + " and " + max);
 	return (Math.floor(Math.random() * (max - min + 1)) + min);
 }
 
@@ -30,10 +32,18 @@ function generateWinningNumber(){
 
 function playersGuessSubmission(){
 	// add code here
-	playerGuess = $('#guessInput').val();
-	$('#guessInput').val('');
-	console.log(playerGuess);
-	checkGuess();
+	if(guessCount == 0){
+		$('#answerBlock').text("Start Again");
+	}
+	else {
+		playerGuess = $('#guessInput').val();
+		$('#guessInput').val('');
+		console.log(playerGuess);
+		checkGuess();
+		guessCount -= 1;
+		$('#guessNumberBlock').text('You have ' + guessCount + ' guesses left');
+	}
+
 }
 
 // Determine if the next guess should be a lower or higher number
@@ -48,36 +58,26 @@ function guessMessage(){
 	lower = "Your guess is lower by more than ";
 	higher = "Your guess is higher by more than ";
 
-	if(difference < -50){
-		return lower + "50";
-	}
-	else if(difference < -25){
-		return lower + "25";
-	}
-	else if(difference < -10){
-		return lower + "10";
-	}
-	else if(difference < -5){
-		return lower + "5";
-	}
-	else if(difference > 50){
-		return higher + "50";
-	}
-	else if(difference > 25){
-		return higher + "25";
-	}
-	else if(difference > 10){
-		return higher + "10";
-	}
-	else if(difference > 5){
-		return higher + "5";
-	}
-	else if(difference < 5 && difference > 0){
+	if(difference < 5 && difference > 0){
 		return "You're higher by less than 5";
 	}
 	else if(difference > -5 && difference < 0){
 		return "You're lower by less than 5";
 	}
+	else{
+		var checks = [50,25,10,5];
+
+		for(var i = 0; i < checks.length; i++) {
+			if(difference < checks[i] * -1) {
+				return lower + checks[i];
+			}
+			if(difference > checks[i]) {
+				return higher + checks[i];
+			}
+		}
+
+	}
+
 }
 
 // Check if the Player's Guess is the winning number 
@@ -85,10 +85,10 @@ function guessMessage(){
 function checkGuess(){
 	// add code here
 	if(playerGuess == winningNumber){
-		$('#answer').text("RIGHT!");
+		$('#answerBlock').text("RIGHT!");
 	}
 	else{
-		$('#answer').text(guessMessage());
+		$('#answerBlock').text(guessMessage());
 	}
 }
 
@@ -96,21 +96,38 @@ function checkGuess(){
 
 function provideHint(){
 	// add code here
+
+	var fakeAnswer1 = generateWinningNumber();
+	var fakeAnswer2 = generateWinningNumber();
+	var hintArray = [fakeAnswer1,fakeAnswer2,winningNumber];
+	shuffle(hintArray);
+
+	$('#answerBlock').text('one of these is the right answer ' + hintArray[0] + ' ' + hintArray[1] + ' ' + hintArray[2]);
+}
+
+function shuffle(arr){
+	var rand, b, c;
+	for (c = arr.length; c; c -= 1){
+		rand = Math.floor(Math.random() * c);
+		b = arr[c-1];
+		arr[c-1] = arr[rand];
+		arr[rand] = b;
+	}
 }
 
 // Allow the "Player" to Play Again
 
 function playAgain(){
-	generateWinningNumber();
-
+	winningNumber = generateWinningNumber();
+	$('#answerBlock').text('START');
+	guessCount = 5;
+	$('#guessNumberBlock').text('You have ' + guessCount + ' guesses left');
 	// add code here
 }
 
-
 /* **** Event Listeners/Handlers ****  */
 $(document).ready(function(){
-
-
 	$('#guess').on('click',playersGuessSubmission);
-	$('#playAgain').on('click',generateWinningNumber);
+	$('#playAgain').on('click',playAgain);
+	$('#hint').on('click',provideHint);
 });

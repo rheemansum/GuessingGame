@@ -14,7 +14,7 @@
 	border-radius:5px;
 	padding:10px;
 }
-#answer{
+#answerBlock{
 	vertical-align:middle;
 	padding-top:30px;
 	border:1px solid #DDDDDD;
@@ -24,11 +24,23 @@
 	width: 300px;
 	background-color:#EEEEEE;
 	font-family:Helvetica,sans-serif;
-	font-size:20px;
+	font-size:16px;
 	text-align:center;
 	color:#555555;
 }
-#textBlock{
+#rangeBlock{
+	width: 300px;
+	margin:5px auto;
+	text-align:center;
+	padding:10px;
+
+	font-family: Helvetica,sans-serif;
+	font-size: 14px;
+	border:2px solid #DDDDDD;
+	border-radius:5px;
+
+}
+#guessNumberBlock{
 	width: 300px;
 	margin:5px auto;
 	text-align:center;
