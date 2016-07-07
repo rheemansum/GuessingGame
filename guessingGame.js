@@ -5,21 +5,16 @@
 /* **** Guessing Game Functions **** */
 
 // Generate the Winning Number'
-var winningNumber, playerGuess, guessCount;
+var winningNumber, playerGuess, guessCount, guessLock;
 $(document).ready(function(){
 	winningNumber = generateWinningNumber();
 	guessCount = 5;
+	guessLock = false;
 	console.log(winningNumber);
 });
 
-function generateRand(){
-
-}
-
-
 function generateWinningNumber(){
 	// add code here
-
 	var max = +$('#max').val();
 	var min = +$('#min').val();
 	if(min == 0){min = 1};
@@ -32,18 +27,18 @@ function generateWinningNumber(){
 
 function playersGuessSubmission(){
 	// add code here
-	if(guessCount == 0){
+	if(guessLock == true){}
+	else if(guessCount == 0){
 		$('#answerBlock').text("Start Again");
 	}
 	else {
 		playerGuess = $('#guessInput').val();
 		$('#guessInput').val('');
-		console.log(playerGuess);
+		console.log(playerGuess);		
 		checkGuess();
 		guessCount -= 1;
 		$('#guessNumberBlock').text('You have ' + guessCount + ' guesses left');
 	}
-
 }
 
 // Determine if the next guess should be a lower or higher number
@@ -66,7 +61,6 @@ function guessMessage(){
 	}
 	else{
 		var checks = [50,25,10,5];
-
 		for(var i = 0; i < checks.length; i++) {
 			if(difference < checks[i] * -1) {
 				return lower + checks[i];
@@ -75,19 +69,22 @@ function guessMessage(){
 				return higher + checks[i];
 			}
 		}
-
 	}
-
 }
 
 // Check if the Player's Guess is the winning number 
 
 function checkGuess(){
 	// add code here
-	if(playerGuess == winningNumber){
-		$('#answerBlock').text("RIGHT!");
-	}
+	if(playerGuess == winningNumber){	
+		$('#previousGuessBlock').append(playerGuess);
+		guessLock = true;	
+		$('#answerBlock').css({'background-color':'#33FF33',
+	'color':'#005500'});
+		$('#answerBlock').text("RIGHT! The answer is "+ winningNumber);		
+	}		
 	else{
+		$('#previousGuessBlock').append(playerGuess + " ");
 		$('#answerBlock').text(guessMessage());
 	}
 }
@@ -119,7 +116,10 @@ function shuffle(arr){
 
 function playAgain(){
 	winningNumber = generateWinningNumber();
+	$('#previousGuessBlock').text("");
+	$('#answerBlock').css({'background-color':'#EEEEEE','color':'#555555'})
 	$('#answerBlock').text('START');
+	guessLock = false;
 	guessCount = 5;
 	$('#guessNumberBlock').text('You have ' + guessCount + ' guesses left');
 	// add code here
@@ -130,4 +130,9 @@ $(document).ready(function(){
 	$('#guess').on('click',playersGuessSubmission);
 	$('#playAgain').on('click',playAgain);
 	$('#hint').on('click',provideHint);
+	$(document).keypress(function(e){
+		if(e.which == 13){
+			playersGuessSubmission();
+		}
+	})
 });
